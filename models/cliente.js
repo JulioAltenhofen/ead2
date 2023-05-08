@@ -31,7 +31,7 @@ const cliente = db.define('cliente', {
 
 (async () => {
     try {
-        await cliente.sync(); //{ force: true }
+        await cliente.sync(); { force: true }
         console.log('Tabela de cliente criada com sucesso.');
 
     } catch (error) { 

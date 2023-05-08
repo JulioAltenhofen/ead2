@@ -3,10 +3,11 @@ const controller = require("../controllers/controllerCliente")
 
 const routes = express.Router()
 
-routes.get("/",controller.getAll)
-routes.get("/:id",controller.getById)
-routes.post("/",controller.create)
-routes.put("/:id",controller.update)
-routes.delete("/:id",controller.delete)
+routes.get("/",controller.listarTodos)
+routes.get("/:id",controller.buscarPorId)
+routes.get("/",controller.buscarPorCidade)
+routes.post("/",controller.criar)
+routes.put("/:id",controller.atualizar)
+routes.delete("/:id",controller.excluir)
 
 module.exports = routes

@@ -1,7 +1,7 @@
 const cliente = require('../models/cliente');
 const controller = {}
 
-controller.getAll = async (req, res) => {
+controller.listarTodos = async (req, res) => {
     try{
         let clientes = await cliente.findAll()
         res.status(200).json(clientes)
@@ -10,21 +10,36 @@ controller.getAll = async (req, res) => {
     }
 }
 
-controller.getById = async (req, res) => {
+controller.buscarPorId = async (req, res) => {
     try{
-        const cliente = await cliente.findByPk(req.params.id)
-        //const clienteX = await cliente.findAll({
-        //    where:{
-        //        descricao:req.params.palavra
-        //    }
-        //})
-        res.status(200).json()
+        const clienteX = await cliente.findAll({
+            where:{
+                descricao:req.params.palavra
+            }
+        })
+        res.status(200).json(clienteX)
     }catch(error){ 
         res.status(422).json("Ocorreu um erro ao buscar o item. " + error)
     }
 }
 
-controller.create = async (req, res) => {
+controller.buscarPorCidade = async (req, res) => {
+    const { cidade } = req.query;
+  
+    try {
+      const clientes = await cliente.findAll({ where: { cidade } });
+      if (clientes.length > 0) {
+        res.status(200).json(clientes);
+      } else {
+        res.status(404).json({ message: 'Nenhum cliente encontrado para esta cidade.' });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Ocorreu um erro ao buscar os clientes.' });
+    }
+  };
+
+controller.criar = async (req, res) => {
     let reqcliente = req.body
 
     try{
@@ -40,7 +55,7 @@ controller.create = async (req, res) => {
 
 }
 
-controller.update = async (req, res) => {
+controller.atualizar = async (req, res) => {
     try{
         let cliente = await cliente.findByPk(req.params.id)
         cliente.descricao = req.body.descricao
@@ -51,7 +66,9 @@ controller.update = async (req, res) => {
     }
 }
 
-controller.delete = async (req, res) => {
+controller.excluir = (req,res)=>{
+    lista.splice(req.params.id-1,1)
+    res.status(200).send("Deletado")
     
 }
 
