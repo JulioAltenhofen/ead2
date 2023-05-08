@@ -9,23 +9,23 @@ const cliente = db.define('cliente', {
     },
     nome: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     email: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     cidade: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     estado: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     cep:{
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     }
 });
 
